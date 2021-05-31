@@ -1,7 +1,5 @@
-# Nous voulons un cmake "récent" pour utiliser les dernières fonctionnalités
 cmake_minimum_required(VERSION 3.0)
 
-# Notre projet est étiqueté hello
 project(mainoptil)
 
 include_directories(${CMAKE_SOURCE_DIR}/exact)
@@ -10,7 +8,7 @@ include_directories(${CMAKE_SOURCE_DIR}/heuristic/src)
 
 link_directories(${CMAKE_SOURCE_DIR}/lib)
 
-# Crée des variables avec les fichiers à compiler
+
 set(CMAKE_CXX_STANDARD 17)
 
 set(SRCS
@@ -44,7 +42,6 @@ set(HEADERS
      exact/lp_solve.hpp
     )
 
-# On indique que l'on veut un exécutable "hello" compilé à partir des fichiers décrits par les variables SRCS et HEADERS
 add_executable(mainoptil ${SRCS} ${HEADERS} )
 
 target_link_libraries(mainoptil Clp ClpSolver CoinUtils z)
