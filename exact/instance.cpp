@@ -241,7 +241,7 @@ void ExactInstance::fast_recompute_lower_bound()
 void ExactInstance::forced_moves()
 {
   
-  int diff = this->upper_bound - this->lower_bound();
+  //int diff = this->upper_bound - this->lower_bound();
   
   
   /*if (nb_branch % 30 == 0)
@@ -258,10 +258,10 @@ void ExactInstance::forced_moves()
   {
     modified = false;
 
-    for (Node u = 0; u < nr_graph_vertices; u++)
-    {
-      cluster_graph.try_kernelize_lonely_vertex(u);
-    }
+    //for (Node u = 0; u < nr_graph_vertices; u++)
+    //{
+    //  cluster_graph.try_kernelize_lonely_vertex(u);
+    //}
 
     for (ClusterId cu = 0; cu < nr_graph_vertices; cu++)
     {
@@ -385,88 +385,9 @@ void ExactInstance::forced_moves()
           continue;
         }
         
-        
-        /*
-        std::vector<int> ncu;
-        for (Node u : cluster_graph.cluster(cu))
-        {
-
-
-          for (Node u2 : graph_neighbors(u))
-          {
-
-            if (!is_marked(u,u2) && !cluster_graph.cluster_Id_of_node(u2) == cv)
-            //if (!is_marked(u, u2) && cluster_graph.cluster_Id_of_node(u2) != cv)
-            if (is_marked(u, u2) || cluster_graph.cluster_Id_of_node(u2) == cv)
-              continue;
-            bool keep = false;
-            
-            for (Node v : cluster_graph.cluster(cv))
-            {
-              if (!is_marked(u2, v) && !has_graph_edge(u2, v))
-              {
-                keep = true;
-                break;
-              }
-            }
-            if (keep)
-              ncu.push_back(u2);
-          }
-        }
-        std::vector<int> ncv;
-        for (Node v : cluster_graph.cluster(cv))
-        {
-          for (Node v2 : graph_neighbors(v))
-          {
-            //if (!is_marked(v, v2) && cluster_graph.cluster_Id_of_node(v2) != cu)
-            if (is_marked(v, v2) || cluster_graph.cluster_Id_of_node(v2) == cu)
-              continue;
-            bool keep = false;
-            for (Node u : cluster_graph.cluster(cu))
-            {
-              if (!is_marked(v2, u) && !has_graph_edge(v2, u))
-              {
-                keep = true;
-                break;
-              }
-            }
-            if (keep)
-              ncv.push_back(v2);
-          }
-        }
-        
-        
-        int merge_lb = lower_bound() + ncu.size() + ncv.size() + cluster_graph.nr_non_edges(cu, cv, false);
-        
-        //for (ClusterId cu2 = 0; cu2 < nr_graph_vertices(); cu2++)
-        for (ClusterId cu2: cluster_graph.neighboring_clusters(cu))
-        {
-          if (cu2 == cv || cluster_graph.has_edge(cu2, cv))
-            continue;
-          merge_lb += cluster_graph.nr_edges(cu2, cu, false);
-        }
-        
-        for (ClusterId cv2: cluster_graph.neighboring_clusters(cv))
-        //for (ClusterId cv2 = 0; cv2 < nr_graph_vertices(); cv2++)
-        {
-          if (cv2 == cu || cluster_graph.has_edge(cv2, cu))
-            continue;
-          merge_lb += cluster_graph.nr_edges(cv2, cv, false);
-        }
-        
-        if (merge_lb >= upper_bound)
-        {
-          split(cu, cv, true);
-          modified = true;
-          continue;
-        }
-        */
       }
     }
   }
-  
-  
-  
   
   for (ClusterId cu = 0; cu < nr_graph_vertices; cu++)
   {
@@ -474,21 +395,15 @@ void ExactInstance::forced_moves()
       continue;
     int max_diff = 0;
     
-    //for (ClusterId cv = 0; cv < nr_graph_vertices(); cv++)
     for (ClusterId cv: cluster_graph.neighboring_clusters(cu))
     {
-      //if (cu == cv || !cluster_graph.has_edge(cu, cv))
-        //continue;
       max_diff = max(max_diff, cluster_graph.nr_edges(cu, cv) - cluster_graph.nr_non_edges(cu, cv));
     }
-    if (max_diff <= 0) // TODO: check with < 
+    if (max_diff <= 0)
     {
       isolate_cluster(cu);
     }
   }
-  
-
-  
   
 }
 

@@ -46,5 +46,5 @@ add_executable(mainoptil ${SRCS} ${HEADERS} )
 
 target_link_libraries(mainoptil Clp ClpSolver CoinUtils z)
 
-target_compile_options(mainoptil PUBLIC -Ofast)
+target_compile_options(mainoptil PUBLIC -Ofast -static)
 

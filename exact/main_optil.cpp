@@ -109,6 +109,8 @@ Solution run_algo(Graph *g)
     else if (time_for_lb > 20 && time_for_lb <= 60)
         nr_recompute_lb = 4;
 
+    //cout << "Recompute lb " << nr_recompute_lb << " times " << endl; 
+
     if (instance.get_upper_bound() == instance.lower_bound())
         nr_recompute_lb = 0;
 
