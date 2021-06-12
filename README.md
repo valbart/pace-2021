@@ -3,6 +3,9 @@
 Submission for the exact track of PACE 2021. 
 Login on optil.io: ValBart, ValBartL, Grrr
 
+[![DOI](https://zenodo.org/badge/372559057.svg)](https://zenodo.org/badge/latestdoi/372559057)
+
+
 ## Installation
 
 Run the following commands in the directory where CMakeLists.txt is located:
