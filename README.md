@@ -24,4 +24,4 @@ We are using the open-source library for linear programming Clp (https://github.
 
 ## Solver description
 
-You can find the solver description [here](./Solver\ description.pdf) 
+You can find the solver description [here](./solver_description.pdf) 
